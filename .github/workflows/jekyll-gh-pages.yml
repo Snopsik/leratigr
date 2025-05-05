@@ -1,43 +1,38 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Пример сайта для GitHub Pages">
-    <title>Мой сайт на GitHub Pages</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+name: Build and Deploy Jekyll site to GitHub Pages
 
-    <header>
-        <h1>Добро пожаловать на мой сайт!</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">О сайте</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
+on:
+  push:
+    branches:
+      - main  # Укажите вашу основную ветку, если она отличается
 
-    <section id="home">
-        <h2>Главная страница</h2>
-        <p>Здесь будет краткое описание вашего проекта или информации.</p>
-    </section>
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    <section id="about">
-        <h2>О сайте</h2>
-        <p>Этот сайт использует GitHub Pages для хостинга статического контента.</p>
-    </section>
+    steps:
+      # Проверка репозитория
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    <section id="contact">
-        <h2>Контакты</h2>
-        <p>Свяжитесь с нами по электронной почте: <a href="mailto:example@example.com">example@example.com</a></p>
-    </section>
+      # Установка Ruby и зависимостей
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7  # Версия Ruby для Jekyll
 
-    <footer>
-        <p>&copy; 2025 Мой сайт на GitHub Pages. Все права защищены.</p>
-    </footer>
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
-</body>
-</html>
+      # Строим сайт
+      - name: Build Jekyll site
+        run: |
+          bundle exec jekyll build
+
+      # Деплой на GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site  # Папка с сгенерированным сайтом
