@@ -40,6 +40,7 @@
       padding: 2rem;
       max-width: 800px;
       margin: auto;
+      text-align: left; /* Вирівнювання тексту в основному контенті */
     }
 
     h2, h3, h4 {
@@ -65,6 +66,20 @@
 
     footer .contacts a:hover {
       text-decoration: underline;
+    }
+
+    /* Стили для встраиваемого видео */
+    .video-block {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .video-block iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      border-radius: 12px;
     }
   </style>
 </head>
@@ -94,24 +109,14 @@
 
     <div class="video-block">
 		<h2>🎥 Відео: Як правильно сперечатися</h2>
-		<iframe src="https://www.youtube.com/watch?v=-AbIdskQxlw" title="" allowfullscreen></iframe>
-	  </div>
-	</main>
-	<footer>
-	  <p>© 2025 Психологічні поради.</p>
-	  <div class="contacts">
-		<p>Контакти: <a href="iryna.vostrykova@oa.edu.ua">iryna.vostrykova@oa.edu.ua</a> | <a href="https://t.me/Zweqqqq" target="_blank">@Zweqqqq</a></p>
-	  </div>
-	</footer>
-
-  <script>
-    function toggleTheme() {
-      const body = document.body;
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', newTheme);
-      document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️ Світла тема' : '🌙 Темна тема';
-    }
-  </script>
+		<iframe src="https://www.youtube.com/embed/-AbIdskQxlw" title="Як правильно сперечатися" allowfullscreen></iframe>
+	</div>
+  </main>
+  <footer>
+    <p>© 2025 Психологічні поради.</p>
+    <div class="contacts">
+      <p>Контакти: <a href="iryna.vostrykova@oa.edu.ua">iryna.vostrykova@oa.edu.ua</a> | <a href="https://t.me/Zweqqqq" target="_blank">@Zweqqqq</a></p>
+    </div>
+  </footer>
 </body>
 </html>
